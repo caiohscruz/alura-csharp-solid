@@ -11,14 +11,12 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
     public class LeilaoController : Controller
     {
 
-        AppDbContext _context;
         LeilaoDao _leilaoDao;
         CategoriaDao _categoriaDao;
 
 
         public LeilaoController()
         {
-            _context = new AppDbContext();
             _leilaoDao = new LeilaoDao();
             _categoriaDao = new CategoriaDao();
 
@@ -26,8 +24,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
 
         public IActionResult Index()
         {
-            var leiloes = _context.Leiloes
-                .Include(l => l.Categoria);
+            var leiloes = _leilaoDao.BuscarLeiloes();
             return View(leiloes);
         }
 
