@@ -1,9 +1,6 @@
-﻿using Alura.LeilaoOnline.WebApp.Models;
-using System;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Alura.LeilaoOnline.WebApp.Models;
 
 namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
 {

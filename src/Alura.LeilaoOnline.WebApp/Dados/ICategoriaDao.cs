@@ -1,5 +1,5 @@
-﻿using Alura.LeilaoOnline.WebApp.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Alura.LeilaoOnline.WebApp.Models;
 
 namespace Alura.LeilaoOnline.WebApp.Dados
 {
