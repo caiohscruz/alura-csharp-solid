@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Alura.LeilaoOnline.WebApp.Dados
+namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
 {
-    public class CategoriaDao
+    public class CategoriaDaoComEFCore : ICategoriaDao
     {
         AppDbContext _context;
 
-        public CategoriaDao()
+        public CategoriaDaoComEFCore()
         {
             _context = new AppDbContext();
         }

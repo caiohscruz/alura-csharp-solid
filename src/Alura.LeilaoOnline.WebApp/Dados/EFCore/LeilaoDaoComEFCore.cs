@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Alura.LeilaoOnline.WebApp.Dados
+namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
 {
-    public class LeilaoDao
+    public class LeilaoDaoComEFCore : ILeilaoDao
     {
         AppDbContext _context;
 
-        public LeilaoDao()
+        public LeilaoDaoComEFCore()
         {
             _context = new AppDbContext();
         }
@@ -27,6 +27,7 @@ namespace Alura.LeilaoOnline.WebApp.Dados
         {
             return _context.Leiloes.Find(id);
         }
+        
         public IEnumerable<Leilao> BuscarLeiloesPorTermo(string termo)
         {
             return _context.Leiloes
@@ -43,6 +44,7 @@ namespace Alura.LeilaoOnline.WebApp.Dados
             _context.Leiloes.Add(leilao);
             _context.SaveChanges();
         }
+        
         public void AlterarLeilao(Leilao leilao)
         {
             _context.Leiloes.Update(leilao);
