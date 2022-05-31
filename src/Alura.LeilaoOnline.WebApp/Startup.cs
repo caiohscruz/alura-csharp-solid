@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Alura.LeilaoOnline.WebApp.Dados;
+using Alura.LeilaoOnline.WebApp.Dados.EFCore;
 
 namespace Alura.LeilaoOnline.WebApp
 {
@@ -7,9 +9,11 @@ namespace Alura.LeilaoOnline.WebApp
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ILeilaoDao, LeilaoDaoComEFCore>();
+            services.AddTransient<ICategoriaDao, CategoriaDaoComEFCore>();
             services
                 .AddControllersWithViews()
-                .AddNewtonsoftJson(options => 
+                .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });

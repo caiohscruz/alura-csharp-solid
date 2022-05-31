@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using Alura.LeilaoOnline.WebApp.Dados.EFCore;
-using Alura.LeilaoOnline.WebApp.Models;
 using System;
+using Microsoft.AspNetCore.Mvc;
+using Alura.LeilaoOnline.WebApp.Models;
 using Alura.LeilaoOnline.WebApp.Dados;
 
 namespace Alura.LeilaoOnline.WebApp.Controllers
@@ -13,10 +12,10 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         ICategoriaDao _categoriaDao;
 
 
-        public LeilaoController()
+        public LeilaoController(ILeilaoDao leilaoDao, ICategoriaDao categoriaDao)
         {
-            _leilaoDao = new LeilaoDaoComEFCore();
-            _categoriaDao = new CategoriaDaoComEFCore();
+            _leilaoDao = leilaoDao;
+            _categoriaDao = categoriaDao;
 
         }
 
