@@ -1,26 +1,22 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Alura.LeilaoOnline.WebApp.Dados;
-using Alura.LeilaoOnline.WebApp.Models;
 using Microsoft.AspNetCore.Routing;
+using Alura.LeilaoOnline.WebApp.Services;
 
 namespace Alura.LeilaoOnline.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        ILeilaoDao _leilaoDao;
-        ICategoriaDao _categoriaDao;
+        IProdutoService _produtoService;
 
-        public HomeController(ILeilaoDao leilaoDao, ICategoriaDao categoriaDao)
+        public HomeController(IProdutoService produtoService)
         {
-            _leilaoDao = leilaoDao;
-            _categoriaDao = categoriaDao;
+            _produtoService = produtoService;
         }
 
         public IActionResult Index()
         {
-            var categorias = _categoriaDao.BuscarCategoriasPorInfoLeilao();
+            var categorias = _produtoService.BuscarCategoriasComInfoLeilao();
             return View(categorias);
         }
 
@@ -34,7 +30,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         [Route("[controller]/Categoria/{categoria}")]
         public IActionResult Categoria(int categoria)
         {
-            var categ = _categoriaDao.BuscarCategoriaPorId(categoria);
+            var categ = _produtoService.BuscarCategoriaPorId(categoria);
             return View(categ);
         }
 
@@ -43,7 +39,7 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
         public IActionResult Busca(string termo)
         {
             ViewData["termo"] = termo;
-            var leiloes = _leilaoDao.BuscarLeiloesPorTermo(termo);
+            var leiloes = _produtoService.BuscarLeiloesPorTermo(termo);
             return View(leiloes);
         }
     }
