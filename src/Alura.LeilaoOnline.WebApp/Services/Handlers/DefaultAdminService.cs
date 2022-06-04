@@ -18,52 +18,52 @@ namespace Alura.LeilaoOnline.WebApp.Services.Handlers
         }
         public IEnumerable<Leilao> BuscarLeiloesComCategoria()
         {
-            return _leilaoDao.BuscarLeiloes();
+            return _leilaoDao.BuscarTodos();
         }
         public Leilao BuscarLeilaoPorId(int id)
         {
-            return _leilaoDao.BuscarLeilaoPorId(id);
+            return _leilaoDao.BuscarPorId(id);
         }
         public IEnumerable<Categoria> BuscarCategorias()
         {
-            return _categoriaDao.BuscarCategorias();
+            return _categoriaDao.BuscarTodos();
         }
 
         public void AdicionarLeilao(Leilao leilao)
         {
-            _leilaoDao.AdicionarLeilao(leilao);
+            _leilaoDao.Incluir(leilao);
         }
 
         public void AlterarLeilao(Leilao leilao)
         {
-            _leilaoDao.AlterarLeilao(leilao);
+            _leilaoDao.Alterar(leilao);
         }
         public void IniciaPregaoLeilaoComId(int id)
         {
-            var leilao = _leilaoDao.BuscarLeilaoPorId(id);
+            var leilao = _leilaoDao.BuscarPorId(id);
             if (leilao != null && leilao.Situacao != SituacaoLeilao.Rascunho)
             {
                 leilao.Situacao = SituacaoLeilao.Pregao;
                 leilao.Inicio = DateTime.Now;
-                _leilaoDao.AlterarLeilao(leilao);
+                _leilaoDao.Alterar(leilao);
             }
         }
         public void FinalizaPregaoLeilaoComId(int id)
         {
-            var leilao = _leilaoDao.BuscarLeilaoPorId(id);
+            var leilao = _leilaoDao.BuscarPorId(id);
             if (leilao != null && leilao.Situacao != SituacaoLeilao.Pregao)
             {
                 leilao.Situacao = SituacaoLeilao.Finalizado;
                 leilao.Termino = DateTime.Now;
-                _leilaoDao.AlterarLeilao(leilao);
+                _leilaoDao.Alterar(leilao);
             }
         }
         public void ExcluiLeilaoComId(int id)
         {
-            var leilao = _leilaoDao.BuscarLeilaoPorId(id);
+            var leilao = _leilaoDao.BuscarPorId(id);
             if (leilao != null && leilao.Situacao != SituacaoLeilao.Pregao)
             {
-                _leilaoDao.ExcluirLeilao(leilao);
+                _leilaoDao.Excluir(leilao);
             }
         }
 
