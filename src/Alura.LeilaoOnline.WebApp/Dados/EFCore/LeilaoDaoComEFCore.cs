@@ -13,42 +13,26 @@ namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
         {
             _context = new AppDbContext();
         }
-
-        public IEnumerable<Leilao> BuscarLeiloes()
+        public IEnumerable<Leilao> BuscarTodos()
         {
             return _context.Leiloes
                 .Include(l => l.Categoria);
         }
-
-        public Leilao BuscarLeilaoPorId(int id)
+        public Leilao BuscarPorId(int id)
         {
             return _context.Leiloes.Find(id);
         }
-        
-        public IEnumerable<Leilao> BuscarLeiloesPorTermo(string termo)
-        {
-            return _context.Leiloes
-                .Include(l => l.Categoria)
-                .Where(l => string.IsNullOrWhiteSpace(termo) ||
-                    l.Titulo.ToUpper().Contains(termo.ToUpper()) ||
-                    l.Descricao.ToUpper().Contains(termo.ToUpper()) ||
-                    l.Categoria.Descricao.ToUpper().Contains(termo.ToUpper())
-                );
-        }
-
-        public void AdicionarLeilao(Leilao leilao)
+        public void Incluir(Leilao leilao)
         {
             _context.Leiloes.Add(leilao);
             _context.SaveChanges();
         }
-        
-        public void AlterarLeilao(Leilao leilao)
+        public void Alterar(Leilao leilao)
         {
             _context.Leiloes.Update(leilao);
             _context.SaveChanges();
         }
-
-        public void ExcluirLeilao(Leilao leilao)
+        public void Excluir(Leilao leilao)
         {
             _context.Leiloes.Remove(leilao);
             _context.SaveChanges();

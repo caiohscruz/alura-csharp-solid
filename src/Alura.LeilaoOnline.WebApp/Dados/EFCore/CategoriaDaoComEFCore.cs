@@ -13,29 +13,16 @@ namespace Alura.LeilaoOnline.WebApp.Dados.EFCore
         {
             _context = new AppDbContext();
         }
-        public IEnumerable<Categoria> BuscarCategorias()
+        public IEnumerable<Categoria> BuscarTodos()
         {
-            return _context.Categorias.ToList();
+            return _context.Categorias
+                .Include(c => c.Leiloes);
         }
-        public IEnumerable<Categoria> BuscarCategoriasComInfoLeilao()
+        public Categoria BuscarPorId(int id)
         {
             return _context.Categorias
                 .Include(c => c.Leiloes)
-                .Select(c => new CategoriaComInfoLeilao
-                {
-                    Id = c.Id,
-                    Descricao = c.Descricao,
-                    Imagem = c.Imagem,
-                    EmRascunho = c.Leiloes.Where(l => l.Situacao == SituacaoLeilao.Rascunho).Count(),
-                    EmPregao = c.Leiloes.Where(l => l.Situacao == SituacaoLeilao.Pregao).Count(),
-                    Finalizados = c.Leiloes.Where(l => l.Situacao == SituacaoLeilao.Finalizado).Count(),
-                });
-        }
-        public Categoria BuscarCategoriaPorId(int categoria)
-        {
-            return _context.Categorias
-                .Include(c => c.Leiloes)
-                .First(c => c.Id == categoria);
+                .First(c => c.Id == id);
         }
     }
 }
